@@ -11,7 +11,7 @@
 		345E9411AC797D6A9429A120 /* Pods_TO_DO_APPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673E1AE651573E93C1338011 /* Pods_TO_DO_APPUITests.framework */; };
 		3F10712EA52D5601FBD7E82B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		602541401F2F3A420004FDC7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6025413E1F2F3A420004FDC7 /* Model.xcdatamodeld */; };
-		602DFC6F1F468FAE0045E9B2 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 602DFC6E1F468FAE0045E9B2 /* db.sqlite3 */; };
+		604011B61F47F14F0044F920 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604011B51F47F14F0044F920 /* NotificationManager.swift */; };
 		604971D21F4526E20014B00D /* SqliteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604971D11F4526E20014B00D /* SqliteManager.swift */; };
 		605234551F3171420005BD21 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605234541F3171420005BD21 /* TaskModel.swift */; };
 		606505B71F2EB5E500134495 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606505B61F2EB5E500134495 /* DatabaseManager.swift */; };
@@ -29,6 +29,7 @@
 		60B2FEB11F2BA69C00A6185F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60B2FEAF1F2BA69C00A6185F /* LaunchScreen.storyboard */; };
 		60B2FEBC1F2BA69C00A6185F /* TO_DO_APPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B2FEBB1F2BA69C00A6185F /* TO_DO_APPTests.swift */; };
 		60B2FEC71F2BA69C00A6185F /* TO_DO_APPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B2FEC61F2BA69C00A6185F /* TO_DO_APPUITests.swift */; };
+		60D49CC21F4A7146009C0C67 /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 60D49CC11F4A7146009C0C67 /* db.sqlite3 */; };
 		60DB5B5E1F3855A600220B8F /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB5B5D1F3855A600220B8F /* OverviewViewController.swift */; };
 		60DB5B601F3857E800220B8F /* PageMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DB5B5F1F3857E800220B8F /* PageMenuCollectionViewCell.swift */; };
 		60DC7E691F39746200A52EBA /* CalculateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC7E681F39746200A52EBA /* CalculateUtility.swift */; };
@@ -79,7 +80,7 @@
 /* Begin PBXFileReference section */
 		1F6C64D96D3FF33D8C82D562 /* Pods_TO_DO_APPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TO_DO_APPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6025413F1F2F3A420004FDC7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		602DFC6E1F468FAE0045E9B2 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
+		604011B51F47F14F0044F920 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		604971D11F4526E20014B00D /* SqliteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SqliteManager.swift; sourceTree = "<group>"; };
 		605234541F3171420005BD21 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		606505B61F2EB5E500134495 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		60B2FEC21F2BA69C00A6185F /* TO-DO-APPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TO-DO-APPUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60B2FEC61F2BA69C00A6185F /* TO_DO_APPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TO_DO_APPUITests.swift; sourceTree = "<group>"; };
 		60B2FEC81F2BA69C00A6185F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60D49CC11F4A7146009C0C67 /* db.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = db.sqlite3; sourceTree = "<group>"; };
 		60DB5B5D1F3855A600220B8F /* OverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		60DB5B5F1F3857E800220B8F /* PageMenuCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		60DC7E681F39746200A52EBA /* CalculateUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateUtility.swift; sourceTree = "<group>"; };
@@ -232,7 +234,7 @@
 		60B2FEA51F2BA69B00A6185F /* TO-DO-APP */ = {
 			isa = PBXGroup;
 			children = (
-				602DFC6E1F468FAE0045E9B2 /* db.sqlite3 */,
+				60D49CC11F4A7146009C0C67 /* db.sqlite3 */,
 				606505BF1F2EDC8600134495 /* KeychainSwiftDistrib.swift */,
 				60B2FEA61F2BA69B00A6185F /* AppDelegate.swift */,
 				60B2FEAA1F2BA69C00A6185F /* Main.storyboard */,
@@ -272,6 +274,7 @@
 				D50AE6CB1F4429C900D6EA15 /* AutoViewController.xib */,
 				D50AE6CE1F442B7C00D6EA15 /* AutoTableViewCell.swift */,
 				D50AE6CF1F442B7C00D6EA15 /* AutoTableViewCell.xib */,
+				604011B51F47F14F0044F920 /* NotificationManager.swift */,
 			);
 			path = "TO-DO-APP";
 			sourceTree = "<group>";
@@ -414,7 +417,7 @@
 				D5617C5B1F3B2027008BC07C /* UserProgressViewController.xib in Resources */,
 				D50AE6D11F442B7C00D6EA15 /* AutoTableViewCell.xib in Resources */,
 				60EBF2E11F3AE90C0093F531 /* TimelineViewController.xib in Resources */,
-				602DFC6F1F468FAE0045E9B2 /* db.sqlite3 in Resources */,
+				60D49CC21F4A7146009C0C67 /* db.sqlite3 in Resources */,
 				60E7E67E1F4425FA002EA542 /* GroupViewController.xib in Resources */,
 				6077CF071F3B2348005E3292 /* TimelineCollectionViewCell.xib in Resources */,
 				60B2FEAE1F2BA69C00A6185F /* Assets.xcassets in Resources */,
@@ -599,6 +602,7 @@
 				60E7E6811F44319A002EA542 /* GroupTableViewCell.swift in Sources */,
 				D5617C5A1F3B2027008BC07C /* UserProgressViewController.swift in Sources */,
 				60F1CDF21F305F4C00821553 /* RepeatTimeViewController.swift in Sources */,
+				604011B61F47F14F0044F920 /* NotificationManager.swift in Sources */,
 				D5A092111F32ADF500BF00D7 /* ProfileViewController.swift in Sources */,
 				607750B71F2B1B0B00DB1CAF /* SignUpViewController.swift in Sources */,
 				D5DBF1031F3329CD004FFEE6 /* User.swift in Sources */,

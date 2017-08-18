@@ -12,18 +12,19 @@ import UIKit
 class TaskModel: NSObject {
     var titleTask = ""
     var descriptionTask = ""
-    var allDay = false
+    var allDay = 0
     var location = ""
     var timeRepeat = 0
     var selectDate = Date()
     var fromTime = ""
     var toTime = ""
     var people: String?
-    var notification: String?
+    var notification = 0
+    var status: String?
 
     override init () {
         fromTime = CommonUtility.currentTime()
         toTime = fromTime
-        notification = "via SMS"
+        status = "Init"
     }
 }

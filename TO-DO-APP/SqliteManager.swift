@@ -17,9 +17,7 @@ class SqliteManager {
     private init() {
         let documentPath = NSSearchPathForDirectoriesInDomains(
             .documentDirectory, .userDomainMask, true).first!
-
         self.destinationFileDbPath = "\(documentPath)/db.sqlite3"
-
         if copyDatabaseIfNeeded() {
             connectDatabase()
         }
@@ -75,8 +73,28 @@ class SqliteManager {
         }
         return result
     }
-    
+
+    func getTodayTasks () -> [[String : Any]] {
+        var listTask = [[String : Any]]()
+        guard let db = self.db else {return []}
+        do {
+            let currentDay = CommonUtility.formatToString(Date())
+            let tasks = try db.prepare("SELECT * FROM tasks WHERE tasks.selectedDate = '\(currentDay)'")
+            for row in tasks {
+                var dictionaryTask = [String:Any]()
+                for (index, name) in tasks.columnNames.enumerated() {
+                    dictionaryTask[name] = row[index]
+                }
+                listTask.append(dictionaryTask)
+            }
+        } catch {
+            return []
+        }
+        return listTask
+    }
+
     func findTaskByGroup(_ groupId:Int) -> [[String : Any]] {
+
         var listTask = [[String : Any]]()
         guard let db = self.db else {return []}
         do {
@@ -92,5 +110,20 @@ class SqliteManager {
             return []
         }
         return listTask
+    }
+
+    func insertData (query: String) -> Bool {
+        guard let db = self.db else {return false}
+        do {
+            _ = try db.run(query)
+            if db.changes >= 1 {
+                return true
+            } else {
+                return false
+            }
+        } catch let error as NSError {
+            print("Oops. Error: \(error)")
+            return false
+        }
     }
 }
