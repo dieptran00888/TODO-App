@@ -16,13 +16,25 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     var countTask: Int?
     var taskTemp:[Task]?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                fsCalendar.dataSource = self
+        fsCalendar.dataSource = self
         fsCalendar.delegate = self
         fsCalendar.firstWeekday = 2
         fsCalendar.appearance.headerMinimumDissolvedAlpha = 0.0
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.title = "Calendar"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir", size: 17)!]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(named: "header_backgroud_create_task"), for: .default)
+        navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "icon_menu")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: #selector(onButtonMenuClicked(_:))), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "icon_search")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: nil), animated: true)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    func onButtonMenuClicked(_ sender: Any) {
+        self.present(UINavigationController(rootViewController: appDelegate.menuViewController!), animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

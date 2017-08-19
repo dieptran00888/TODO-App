@@ -17,6 +17,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var archivedBottomImage: UIImageView!
 
     private var countTaskInGroups = [[String: Any]]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func openMenuSidebar(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.present(UINavigationController(rootViewController: appDelegate.menuViewController!), animated: true, completion: nil)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

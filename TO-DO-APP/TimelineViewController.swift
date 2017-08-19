@@ -16,6 +16,7 @@ class TimelineViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var labelFullDay: UILabel!
 
     var listTask = [[String : Any]]()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +42,10 @@ class TimelineViewController: UIViewController, UICollectionViewDataSource, UICo
         image = image?.withRenderingMode(.alwaysOriginal)
 
         navigationItem.setRightBarButton(UIBarButtonItem(image: image, style: .done, target: self, action: nil), animated: true)
-
     }
 
     func openMenuSidebar(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        self.present(UINavigationController(rootViewController: appDelegate.menuViewController!), animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

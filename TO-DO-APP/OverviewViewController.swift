@@ -32,11 +32,20 @@ class OverviewViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var circleViewCompleted: UICircularProgressRingView!
     @IBOutlet weak var circleViewTotal: UICircularProgressRingView!
     @IBOutlet weak var circleViewOther: UICircularProgressRingView!
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectView.dataSource = self
         collectView.delegate = self
+        navigationController?.navigationBar.isTranslucent = false
+        navigationItem.title = "Overview"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir", size: 17)!]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(named: "header_backgroud_create_task"), for: .default)
+        navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "icon_menu")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: #selector(onButtonMenuClicked(_:))), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "avatar")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: nil), animated: true)
+        navigationController?.navigationBar.shadowImage = UIImage()
         let month = CommonUtility.getCurrenMonth()
         if let monthSelected = Int(month) {
             self.monthSelected = monthSelected
@@ -44,6 +53,10 @@ class OverviewViewController: UIViewController, UICollectionViewDataSource, UICo
         listTasks = DatabaseManager.shared.fetchDataWithQuery(month) as? [Task]
         setDefaultCircleView(listTasks)
         setValueCircleView()
+    }
+    
+    func onButtonMenuClicked(_ sender:Any) {
+        self.present(UINavigationController(rootViewController: appDelegate.menuViewController!), animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

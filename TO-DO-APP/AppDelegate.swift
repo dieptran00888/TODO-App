@@ -15,26 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var window: UIWindow?
     let databaseManager = DatabaseManager.shared
+    var menuViewController:UIViewController?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let sharedNotification = NotificationManager.shared
         UIApplication.shared.applicationIconBadgeNumber = sharedNotification.getNumberBadge()
         UNUserNotificationCenter.current().delegate = self
-
-//        window = UIWindow.init(frame: UIScreen.main.bounds)
-//
-//        // Set Background Color of window
-//        window?.backgroundColor = UIColor.white
-//
-//        // Allocate memory for an instance of the 'MainViewController' class
-//        let mainViewController = TimelineViewController()
-//
-//        // Set the root view controller of the app's window
-//        window!.rootViewController = mainViewController
-//
-//        // Make the window visible
-//        window!.makeKeyAndVisible()
-
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        menuViewController = storyboard.instantiateViewController(withIdentifier: "menuView") as! MenuViewController
         return true
     }
 

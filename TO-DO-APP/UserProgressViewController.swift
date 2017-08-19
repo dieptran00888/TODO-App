@@ -31,6 +31,7 @@ class UserProgressViewController: UIViewController {
     @IBOutlet weak var circleViewCompleted: UICircularProgressRingView!
     @IBOutlet weak var monthLabel: UILabel!
     var indexMonth = Int(CommonUtility.getCurrenMonth())!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBAction func buttonChevronRightClicked(_ sender: Any) {
         if indexMonth < 12 {
@@ -58,6 +59,12 @@ class UserProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Profile"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir", size: 17)!]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(named: "header_backgroud_create_task"), for: .default)
+        navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "icon_menu")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: #selector(onButtonMenuClicked(_:))), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "icon_edit")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .done, target: self, action: nil), animated: true)
+        navigationController?.navigationBar.shadowImage = UIImage()
         if let month = CommonUtility.Months(rawValue: indexMonth) {
             monthLabel.text = CommonUtility.getMonth(month)
         }
@@ -70,6 +77,10 @@ class UserProgressViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func onButtonMenuClicked(_ sender: Any) {
+        self.present(UINavigationController(rootViewController: appDelegate.menuViewController!), animated: true, completion: nil)
     }
     
     func setDefaultCircleView(_ listTasks: [Task]?) {

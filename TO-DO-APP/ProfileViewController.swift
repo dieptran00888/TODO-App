@@ -24,6 +24,9 @@ class ProfileViewController: UIViewController {
         genderTextField.text = AppData.shared.userInfo?.userGender
     }
     
+    @IBAction func onButtonLogoutClicked(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadUserInfo()

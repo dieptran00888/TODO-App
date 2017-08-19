@@ -15,7 +15,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var taskTableView: UITableView!
 
     var arrTasks = [[String: Any]]()
-
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         taskTableView.dataSource = self
@@ -25,6 +26,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         labelWelcome.text = CommonUtility.getDayInTheDay()
         let query = "SELECT * FROM tasks WHERE tasks.status LIKE 'init'"
         arrTasks = SqliteManager.shared.getDataWithQuery(query: query)
+    }
+    
+    func onButtonMenuClicked(_ sender:Any) {
+        navigationController?.pushViewController(appDelegate.menuViewController!, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
