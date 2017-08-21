@@ -38,6 +38,15 @@ final class CommonUtility {
         return dateFormatter.date(from: date)!
     }
 
+    static func formatStringToDateWithsecondsFromGMT(date: String, secondsFromGMT: Int) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy hh:mm a"
+        dateFormatter.locale = Locale.current
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: secondsFromGMT)
+        let date = dateFormatter.date(from: date)
+        return date
+    }
+
     static func currentTime () -> String {
         let date = Date()
         let dateFormatter = DateFormatter()
