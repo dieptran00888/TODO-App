@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TaskModel: NSObject {
+class TaskModel {
     var titleTask = ""
     var descriptionTask = ""
     var allDay = 0
@@ -21,8 +21,8 @@ class TaskModel: NSObject {
     var people: String?
     var notification = 0
     var status: String?
-
-    override init () {
+    
+    init () {
         fromTime = CommonUtility.currentTime()
         toTime = fromTime
         status = "Init"
