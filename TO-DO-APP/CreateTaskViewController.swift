@@ -28,7 +28,10 @@ class CreateTaskViewController: UIViewController {
     @IBOutlet weak var buttonSelectTime: UIButton!
 
     var task: TaskModel?
+    var arrTasks = [TaskModel]()
     let sharedDatabaseManager = DatabaseManager.shared
+
+    var updateTaskForMainViewController: (([TaskModel]) -> Void)?
 
     @IBAction func buttonCreateTask(_ sender: Any) {
         //        save bang sqlite3
@@ -44,15 +47,24 @@ class CreateTaskViewController: UIViewController {
             let selectDate = task?.selectDate,
             let notification = task?.notification,
             let status = task?.status {
-            query = "INSERT INTO tasks (title, description, selectedDate, fromTime, toTime, allDay, location, notification, repeatTime, group_id, user_id, status) VALUES ('\(title)', '\(descriptionTask)', '\(CommonUtility.formatToString(selectDate))', '\(fromTime)', '\(toTime)', \(allDay), '\(location)', \(notification), \(repeatTime), \(1), \(1), '\(status)')"
-            isInserted = SqliteManager.shared.insertData(query: query)
-            if isInserted {
-                let dateString = "\(CommonUtility.formatToString(selectDate)) \(fromTime)"
-                let date = CommonUtility.formatStringToDateWithsecondsFromGMT(date: dateString, secondsFromGMT: 0)
-                if let dateFormat = date {
-                    NotificationManager.shared.addNotification(title: title, subtitle: descriptionTask, body: location, date: dateFormat)
+                query = "INSERT INTO tasks (title, description, selectedDate, fromTime, toTime, allDay, location, notification, repeatTime, group_id, user_id, status) VALUES ('\(title)', '\(descriptionTask)', '\(CommonUtility.formatToString(selectDate))', '\(fromTime)', '\(toTime)', \(allDay), '\(location)', \(notification), \(repeatTime), \(1), \(1), '\(status)')"
+                isInserted = SqliteManager.shared.insertData(query: query)
+                if isInserted {
+                    let dateString = "\(CommonUtility.formatToString(selectDate)) \(fromTime)"
+                    let date = CommonUtility.formatStringToDateWithsecondsFromGMT(date: dateString, secondsFromGMT: 0)
+                    if let dateFormat = date {
+                        NotificationManager.shared.addNotification(title: title, subtitle: descriptionTask, body: location, date: dateFormat)
+                    }
                 }
-            }
+
+                task?.titleTask = title
+                task?.descriptionTask = descriptionTask
+                task?.fromTime = descriptionTask
+                task?.toTime = toTime
+                
+                if let taskModel = task {
+                    arrTasks.append(taskModel)
+                }
         }
 
         //        Save bang coredata
@@ -70,6 +82,7 @@ class CreateTaskViewController: UIViewController {
         alert.addAction(actionCancel)
         if !message.isEmpty {
             let actionOk = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (UIAlertAction) in
+                self.updateTaskForMainViewController?(self.arrTasks)
                 self.task = nil
                 self.dismiss(animated: true, completion: nil)
             })
@@ -79,6 +92,7 @@ class CreateTaskViewController: UIViewController {
     }
 
     @IBAction func buttonCancelCreateTask(_ sender: Any) {
+        updateTaskForMainViewController?(arrTasks)
         self.dismiss(animated: true, completion: nil)
         task = nil
     }

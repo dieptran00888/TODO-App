@@ -44,7 +44,8 @@ class AutoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         guard let idOfGroup = groupId else {return}
-        self.listTask = SqliteManager.shared.findTaskByGroup(idOfGroup)
+        let query = "SELECT * FROM tasks WHERE tasks.group_id = \(idOfGroup)"
+        self.listTask = SqliteManager.shared.getDataWithQuery(query: query)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,6 +64,5 @@ class AutoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

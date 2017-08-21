@@ -19,28 +19,22 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    func update (with: Task) {
-        let task = with
+    func update (timeTask: String, title: String, description: String, status: String) {
         var imageName = ""
-        var date = ""
 
-        if let status = task.status {
-            switch status {
-            case "completed":
-                imageName = "completed.png"
-            case "snoozed":
-                imageName = "snoozed.png"
-            case "overdue":
-                imageName = "overdue.png"
-            default: imageName = "completed.png"
-            }
+        switch status {
+        case "completed":
+            imageName = "completed.png"
+        case "snoozed":
+            imageName = "snoozed.png"
+        case "overdue":
+            imageName = "overdue.png"
+        default: imageName = "completed.png"
         }
-        if let fromTime = task.from_time, let toTime = task.to_time {
-            date = fromTime + " - " + toTime
-        }
+
         pointColorImageView.image = UIImage(named: imageName)
-        taskTimeLabel.text = date
-        taskTitleLabel.text = task.title
-        taskDescriptionLabel.text = task.description_task
+        taskTimeLabel.text = timeTask
+        taskTitleLabel.text = title
+        taskDescriptionLabel.text = description
     }
 }

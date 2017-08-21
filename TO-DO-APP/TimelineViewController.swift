@@ -15,7 +15,7 @@ class TimelineViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var labelNameDay: UILabel!
     @IBOutlet weak var labelFullDay: UILabel!
 
-    var taskList = [Task]()
+    var listTask = [[String : Any]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,10 @@ class TimelineViewController: UIViewController, UICollectionViewDataSource, UICo
         let nidName = UINib(nibName: "TimelineCollectionViewCell", bundle: nil)
         timelineCollectionView.register(nidName, forCellWithReuseIdentifier: "Cell")
 
-        if let tasks = DatabaseManager.shared.fetchDataCurrentdateWithStatus() as? [Task] {
-            taskList.append(contentsOf: tasks)
-        }
         let currentDay = Date()
+        let query = "SELECT * FROM tasks WHERE tasks.selectedDate = '\(CommonUtility.formatToString(currentDay))'"
+        listTask = SqliteManager.shared.getDataWithQuery(query: query)
+
         labelFullDay.text = CommonUtility.getMonthInYear(currentDay)
         labelNameDay.text = CommonUtility.getDayName(currentDay)
         labelNumberDay.text = CommonUtility.getNumberDay(currentDay)
@@ -57,14 +57,19 @@ class TimelineViewController: UIViewController, UICollectionViewDataSource, UICo
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return taskList.count
+        return listTask.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! TimelineCollectionViewCell
-        let task = taskList[indexPath.row]
-                
-        cell.update(with: task)
+        if let fromTime = listTask[indexPath.row]["fromTime"] as? String,
+            let toTime = listTask[indexPath.row]["toTime"] as? String,
+            let title = listTask[indexPath.row]["title"] as? String,
+            let description = listTask[indexPath.row]["description"] as? String,
+            let status = listTask[indexPath.row]["status"] as? String {
+                let timeTask = "\(fromTime) - \(toTime)"
+                cell.update(timeTask: timeTask, title: title, description: description, status: status)
+        }
         return cell
     }
 

@@ -16,14 +16,16 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var popularBottomImage: UIImageView!
     @IBOutlet weak var archivedBottomImage: UIImageView!
 
-    private var countTaskInGroup: [Group]?
+    private var countTaskInGroups = [[String: Any]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         listGroupTableView.dataSource = self
         listGroupTableView.delegate = self
 
-        countTaskInGroup = SqliteManager.shared.countTasksAllGroup()
+        let query = "SELECT groups.id, groups.name as nameGroup, count(tasks.id) as numberTasks, groups.image as imageGroup FROM groups LEFT JOIN tasks ON groups.id == tasks.group_id GROUP BY groups.name ORDER BY groups.name DESC"
+
+        countTaskInGroups = SqliteManager.shared.getDataWithQuery(query: query)
 
         let groupNid = UINib(nibName: "GroupTableViewCell", bundle: nil)
         listGroupTableView.register(groupNid, forCellReuseIdentifier: "Cell")
@@ -55,15 +57,16 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countTaskInGroup?.count ?? 0
+        return countTaskInGroups.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? GroupTableViewCell else {return UITableViewCell()}
-        if let nameGroup = countTaskInGroup?[indexPath.row].name,
-            let numberTask = countTaskInGroup?[indexPath.row].numberTask,
-            let imageGroup = countTaskInGroup?[indexPath.row].image {
-            cell.updateCell(nameGroup: nameGroup, numberTask: String(numberTask), imageGroup: imageGroup)
+
+        if let nameGroup = countTaskInGroups[indexPath.row]["nameGroup"] as? String,
+            let numberTask = countTaskInGroups[indexPath.row]["numberTasks"] as? Int64,
+            let imageGroup = countTaskInGroups[indexPath.row]["imageGroup"] as? String {
+                cell.updateCell(nameGroup: nameGroup, numberTask: String(numberTask), imageGroup: imageGroup)
         }
         return cell
     }
@@ -73,9 +76,9 @@ class GroupViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let groupId = countTaskInGroup?[indexPath.row].groupId else {return}
+        guard let groupId = countTaskInGroups[indexPath.row]["id"] as? NSNumber else {return}
         let destinationScreen = AutoViewController()
-        destinationScreen.groupId = groupId
+        destinationScreen.groupId = Int(groupId)
         navigationController?.pushViewController(destinationScreen, animated: true)
     }
 
